@@ -1,0 +1,718 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+<title>GVS COMPUTER CENTER</title>  
+  
+<style>  
+/* ===== BODY STYLE ===== */  
+body{  
+  margin:0;  
+  font-family:Arial, sans-serif;  
+  
+  /* ✅ LIGHT BACKGROUND (CHANGED) */  
+  background:linear-gradient(135deg,#f7fbff,#eef6ff,#ffffff);  
+  
+  color:#111;  
+  text-align:center;  
+  overflow-x:hidden;  
+}  
+  
+/* ✅ LIGHT ANIMATED BACKGROUND (CHANGED) */  
+body::before{  
+  content:"";  
+  position:fixed;  
+  width:200%;  
+  height:200%;  
+  background:radial-gradient(circle,rgba(0,0,0,0.06),transparent);  
+  animation:moveBg 12s linear infinite;  
+  z-index:-1;  
+}  
+  
+@keyframes moveBg{  
+  0%{transform:translate(0,0);}  
+  100%{transform:translate(-200px,-200px);}  
+}  
+  
+/* ===== TOP THIN FIXED BAR ===== */  
+.top-bar{  
+  position:fixed;  
+  top:0;  
+  left:0;  
+  width:100%;  
+  height:45px;  
+  background:rgba(255,255,255,0.75);     /* ✅ light */  
+  backdrop-filter:blur(10px);  
+  display:flex;  
+  align-items:center;  
+  justify-content:flex-end;  
+  padding:0 15px;  
+  z-index:9999;  
+  box-shadow:0 2px 10px rgba(0,0,0,0.12); /* ✅ soft */  
+  gap:10px; /* ✅ added for spacing between buttons */  
+}  
+  
+/* ===== HEADER ===== */  
+.header{  
+  padding:30px 10px;  
+  animation:fadeDown 1.2s ease;  
+}  
+  
+@keyframes fadeDown{  
+  from{opacity:0; transform:translateY(-40px);}  
+  to{opacity:1; transform:translateY(0);}  
+}  
+  
+/* ===== DP STYLE ===== */  
+.dp{  
+  width:150px;  
+  height:150px;  
+  border-radius:50%;  
+  border:5px solid white;  
+  object-fit:cover;  
+  box-shadow:0 0 25px rgba(0,255,255,0.55);  
+  transition:0.4s;  
+}  
+  
+.dp:hover{  
+  transform:scale(1.1) rotate(5deg);  
+  box-shadow:0 0 40px rgba(0,255,255,0.8);  
+}  
+  
+/* ===== HEADING ===== */  
+h1{  
+  margin-top:15px;  
+  font-size:38px;  
+  letter-spacing:2px;  
+  color:#00a7b3;  
+  text-shadow:0 0 10px rgba(0,167,179,0.35);  
+}  
+  
+/* ===== COURSE BOX ===== */  
+.course-box{  
+  margin:40px auto;  
+  width:80%;  
+  max-width:600px;  
+  padding:25px;  
+  border-radius:15px;  
+  
+  /* ✅ LIGHT GLASS LOOK (CHANGED) */  
+  background:rgba(255,255,255,0.75);  
+  backdrop-filter:blur(10px);  
+  box-shadow:0 0 20px rgba(0,0,0,0.10);  
+  animation:fadeUp 1.5s ease;  
+  
+  color:#111;  
+}  
+  
+@keyframes fadeUp{  
+  from{opacity:0; transform:translateY(40px);}  
+  to{opacity:1; transform:translateY(0);}  
+}  
+  
+.course-box h2{  
+  color:#b8860b;  
+  margin-bottom:15px;  
+}  
+  
+/ * ===== LIST STYLE ===== */  
+ul{  
+  text-align:left;  
+  display:inline-block;  
+  font-size:18px;  
+  line-height:1.8;  
+  color:#111;  
+}  
+  
+li{  
+  margin:6px 0;  
+  transition:0.3s;  
+}  
+  
+li:hover{  
+  color:#007f8a;  
+  transform:translateX(8px);  
+}  
+  
+/* ===== APPLY BOX ===== */  
+.apply-box{  
+  width:160px;  
+  padding:10px 12px;  
+  background:#00ffff;  
+  color:black;  
+  font-weight:bold;  
+  border-radius:8px;  
+  cursor:pointer;  
+  transition:0.3s;  
+  margin:0;  
+  user-select:none;  
+}  
+  
+.apply-box:hover{  
+  transform:scale(1.05);  
+}  
+  
+/* ✅ RESULT BUTTON (NEW) */  
+.result-box{  
+  width:120px;  
+  padding:10px 12px;  
+  background:#00ffff;  
+  color:black;  
+  font-weight:bold;  
+  border-radius:8px;  
+  cursor:pointer;  
+  transition:0.3s;  
+  margin:0;  
+  user-select:none;  
+}  
+  
+.result-box:hover{  
+  transform:scale(1.05);  
+}  
+  
+/* ✅ disable look */  
+.result-box.disabled{  
+  opacity:0.5;  
+  cursor:not-allowed;  
+  pointer-events:none;  
+}  
+  
+/* ===== FORM PAGE ===== */  
+#formPage{  
+  display:none;  
+  
+  /* ✅ ONE SOLID LIGHT COLOR (CHANGED) */  
+  background:#f5f7fb;  
+  
+  color:#111;  
+  min-height:100vh;  
+  padding-top:20px;  
+}  
+  
+/* ✅ RESULT SEARCH PAGE (NEW) */  
+#resultSearchPage{  
+  display:none;  
+  background:#f5f7fb;  
+  color:#111;  
+  min-height:100vh;  
+  padding-top:20px;  
+}  
+  
+/* ===== FORM STYLE (YOUR CODE SAME) ===== */  
+.container{  
+  width:900px;  
+  margin:30px auto;  
+  
+  /* ✅ clean solid white card */  
+  background:#ffffff;  
+  
+  box-shadow:0 0 10px rgba(0,0,0,0.12);  
+  padding:20px;  
+  
+  border-radius:6px;  
+}  
+  
+.title{  
+  font-size:20px;  
+  font-weight:bold;  
+  margin-bottom:10px;  
+}  
+  
+.header2{  
+  background:#f7941d;  
+  color:white;  
+  padding:10px;  
+  font-weight:bold;  
+}  
+  
+.form-row{  
+  display:flex;  
+  gap:20px;  
+  margin-top:15px;  
+}  
+  
+.form-group{  
+  flex:1;  
+  display:flex;  
+  flex-direction:column;  
+}  
+  
+label{  
+  font-size:14px;  
+  margin-bottom:5px;  
+}  
+  
+input, select, textarea{  
+  padding:8px;  
+  border:1px solid #ccc;  
+  border-radius:3px;  
+  background:#fff;  
+}  
+  
+textarea{  
+  height:80px;  
+}  
+  
+.submit-btn{  
+  margin-top:20px;  
+  background:#007bff;  
+  color:white;  
+  border:none;  
+  padding:10px 25px;  
+  float:right;  
+  cursor:pointer;  
+  border-radius:4px;  
+}  
+  
+.submit-btn:hover{  
+  background:#0056b3;  
+}  
+  
+.note{  
+  color:red;  
+  font-size:12px;  
+}  
+  
+.back-btn{  
+  margin:20px;  
+  padding:10px 20px;  
+  background:black;  
+  color:white;  
+  border:none;  
+  cursor:pointer;  
+  border-radius:4px;  
+}  
+  
+/* ✅ RESULT CARD (NEW) */  
+.result-card{  
+  text-align:left;  
+  margin-top:15px;  
+  padding:15px;  
+  border:1px solid #e5e7eb;  
+  border-radius:6px;  
+  background:#fff;  
+}  
+.result-card .row{  
+  display:flex;  
+  gap:10px;  
+  margin:6px 0;  
+  flex-wrap:wrap;  
+}  
+.badge{  
+  display:inline-block;  
+  padding:4px 10px;  
+  border-radius:999px;  
+  background:#eef6ff;  
+  border:1px solid #d7e9ff;  
+  font-size:12px;  
+}  
+  
+/* ✅ MOBILE RESPONSIVE (ADDED but minimal) */  
+@media (max-width: 950px){  
+  .container{  
+    width:92%;  
+  }  
+  .form-row{  
+    flex-direction:column;  
+  }  
+}  
+</style>  
+</head>  
+  
+<body>  
+  
+<!-- ===== TOP BAR ===== -->  
+<div class="top-bar">  
+  <div class="apply-box" onclick="openForm()">Forms Apply</div>  
+  
+  <!-- ✅ NEW Result button (enabled only after submit/save) -->  
+  <div id="resultBtn" class="result-box disabled" onclick="openResultSearch()">Result</div>  
+</div>  
+  
+<!-- ===== MAIN WEBSITE ===== -->  
+<div id="mainPage">  
+  <div class="header">  
+    <img src="dp.png" class="dp" alt="dp" />  
+    <h1>GVS COMPUTER CENTER</h1>  
+  </div>  
+  
+  <div class="course-box">  
+    <h2>Courses</h2>  
+    <ul>  
+      <li>CCC</li>  
+      <li>D.C.A.</li>  
+      <li>ADCA</li>  
+      <li>PGDCA</li>  
+      <li>BCC</li>  
+      <li>DTP</li>  
+      <li>DADTP</li>  
+      <li>DCA</li>  
+      <li>BCAD</li>  
+      <li>ADFD</li>  
+      <li>CCA</li>  
+      <li>ADIT</li>  
+      <li>Tally GST etc.</li>  
+    </ul>  
+  </div>  
+</div>  
+  
+<!-- ===== FORM PAGE ===== -->  
+<div id="formPage">  
+  <button class="back-btn" onclick="goBack()">⬅ Back</button>  
+  
+  <div class="container">  
+    <div class="title">GVS COMPUTER CENTER</div>  
+    <div class="header2">Student Details</div>  
+
+    <!-- ✅ NEW: Submit message area (so form stays and new form can be created) -->
+    <div id="submitMsg" style="display:none; margin-top:12px;"></div>
+  
+    <form id="studentForm">  
+
+      <!-- ✅ Roll No box -->
+      <div class="form-row">  
+        <div class="form-group">  
+          <label>Roll No. *</label>  
+          <input id="rollNoInput" type="text" required />  
+        </div>  
+      </div>  
+  
+      <div class="form-row">  
+        <div class="form-group">  
+          <label>Student Full Name *</label>  
+          <input id="studentName" type="text" required />  
+        </div>  
+  
+        <div class="form-group">  
+          <label>Session *</label>  
+          <select id="session" required>  
+            <option value="">Select Session</option>  
+            <option>2023-24</option>  
+            <option>2024-25</option>  
+          </select>  
+        </div>  
+      </div>  
+  
+      <div class="form-row">  
+        <div class="form-group">  
+          <label>Course type *</label>  
+          <select id="courseType" required>  
+            <option value="">Select Course</option>  
+            <option>CCC</option>  
+            <option>DCA</option>  
+            <option>ADCA</option>  
+            <option>PGDCA</option>  
+            <option>BCC</option>  
+            <option>DTP</option>  
+            <option>DADTP</option>  
+            <option>BCAD</option>  
+            <option>ADFD</option>  
+            <option>CCA</option>  
+            <option>ADIT</option>  
+            <option>Tally GST</option>  
+          </select>  
+        </div>  
+  
+        <div class="form-group">  
+          <label>Course of interest</label>  
+          <select id="courseInterest">  
+            <option value="">Select Course</option>  
+            <option>ADVANCE DIPLOMA IN COMPUTER APPLICATION (ADCA) 1 YEAR</option>  
+          </select>  
+        </div>  
+      </div>  
+  
+      <div class="form-row">  
+        <div class="form-group">  
+          <label>Father/Husband Name *</label>  
+          <input id="fatherName" type="text" required />  
+        </div>  
+  
+        <div class="form-group">  
+          <label>Mother Name</label>  
+          <input id="motherName" type="text" />  
+        </div>  
+      </div>  
+  
+      <div class="form-row">  
+        <div class="form-group">  
+          <label>Student Mobile *</label>  
+          <input id="studentMobile" type="text" required />  
+        </div>  
+  
+        <div class="form-group">  
+          <label>Alternate Mobile</label>  
+          <input id="altMobile" type="text" />  
+        </div>  
+      </div>  
+  
+      <div class="form-row">  
+        <div class="form-group">  
+          <label>Email Address *</label>  
+          <input id="email" type="email" required />  
+        </div>  
+  
+        <div class="form-group">  
+          <label>Date of Birth *</label>  
+          <input id="dob" type="date" required />  
+        </div>  
+      </div>  
+  
+      <div class="form-row">  
+        <div class="form-group">  
+          <label>Gender *</label>  
+          <select id="gender" required>  
+            <option value="">Select</option>  
+            <option>Male</option>  
+            <option>Female</option>  
+          </select>  
+        </div>  
+  
+        <div class="form-group">  
+          <label>Profile Photo</label>  
+          <input id="photo" type="file" />  
+        </div>  
+      </div>  
+  
+      <div class="form-row">  
+        <div class="form-group">  
+          <label>Qualification</label>  
+          <select id="qualification">  
+            <option value="">Select Qualification</option>  
+            <option>10th</option>  
+            <option>12th</option>  
+            <option>Graduate</option>  
+          </select>  
+        </div>  
+  
+        <div class="form-group">  
+          <label>Marksheet/Certificate</label>  
+          <input id="marksheet" type="file" />  
+        </div>  
+      </div>  
+  
+      <div class="form-row">  
+        <div class="form-group">  
+          <label>Aadhar Card</label>  
+          <input id="aadhar" type="file" />  
+        </div>  
+      </div>  
+  
+      <div class="form-row">  
+        <div class="form-group">  
+          <label>Full Address *</label>  
+          <textarea id="address" required></textarea>  
+        </div>  
+      </div>  
+  
+      <button class="submit-btn" type="submit">SUBMIT</button>  
+    </form>  
+  </div>  
+</div>  
+  
+<!-- ✅ RESULT SEARCH PAGE (NEW) -->  
+<div id="resultSearchPage">  
+  <button class="back-btn" onclick="backFromResult()">⬅ Back</button>  
+  
+  <div class="container">  
+    <div class="title">GVS COMPUTER CENTER</div>  
+    <div class="header2">Result</div>  
+  
+    <form id="resultSearchForm">  
+      <div class="form-row">  
+        <div class="form-group">  
+          <label>Student Name *</label>  
+          <input id="searchName" type="text" required />  
+        </div>  
+  
+        <div class="form-group">  
+          <label>Roll No. *</label>  
+          <input id="searchRoll" type="text" required />  
+        </div>  
+      </div>  
+  
+      <button class="submit-btn" type="submit">SEARCH</button>  
+      <div style="clear:both;"></div>  
+    </form>  
+  
+    <div id="resultOutput"></div>  
+  </div>  
+</div>  
+  
+<script>  
+/* ========= SIMPLE LOCAL SAVE + RESULT SEARCH =========  
+   - data save in browser localStorage  
+   - submit ke baad form reset ho jayega (NEW)  
+   - top bar me Result button enable ho jata  
+*/  
+  
+function openForm(){  
+  hideAllPages();  
+  document.getElementById("formPage").style.display="block";  
+  window.scrollTo(0,0);  
+}  
+  
+function goBack(){  
+  hideAllPages();  
+  document.getElementById("mainPage").style.display="block";  
+}  
+  
+function openResultSearch(){  
+  hideAllPages();  
+  document.getElementById("resultSearchPage").style.display="block";  
+  window.scrollTo(0,0);  
+}  
+  
+function backFromResult(){  
+  hideAllPages();  
+  document.getElementById("mainPage").style.display="block";  
+}  
+  
+function hideAllPages(){  
+  document.getElementById("mainPage").style.display="none";  
+  document.getElementById("formPage").style.display="none";  
+  document.getElementById("resultSearchPage").style.display="none";  
+}  
+  
+function saveRecord(record){  
+  const key = "gvs_results";  
+  const arr = JSON.parse(localStorage.getItem(key) || "[]");  
+  arr.push(record);  
+  localStorage.setItem(key, JSON.stringify(arr));  
+}  
+  
+function syncResultButton(){  
+  const key = "gvs_results";  
+  const arr = JSON.parse(localStorage.getItem(key) || "[]");  
+  const btn = document.getElementById("resultBtn");  
+  if(arr.length > 0){  
+    btn.classList.remove("disabled");  
+  }else{  
+    btn.classList.add("disabled");  
+  }  
+}  
+  
+function escapeHtml(str){  
+  return String(str || "")  
+    .replaceAll("&","&amp;")  
+    .replaceAll("<","&lt;")  
+    .replaceAll(">","&gt;")  
+    .replaceAll('"',"&quot;")  
+    .replaceAll("'","&#039;");  
+}  
+
+/* ✅ NEW: Show success message but DO NOT replace form (so multiple students can submit) */
+function showSubmitMessage(record){
+  const box = document.getElementById("submitMsg");
+  box.style.display = "block";
+  box.innerHTML = `
+    <div class="result-card">
+      <div class="badge">Saved Successfully ✅</div>
+      <div class="row"><b>Name:</b> <span>${escapeHtml(record.name)}</span></div>
+      <div class="row"><b>Roll No:</b> <span>${escapeHtml(record.rollNo)}</span></div>
+      <div style="margin-top:12px;">
+        <button class="submit-btn" style="float:none;" onclick="openResultSearch()">Go to Result Search</button>
+      </div>
+    </div>
+  `;
+  window.scrollTo(0,0);
+}
+  
+/* ====== FORM SUBMIT HANDLER ====== */  
+document.getElementById("studentForm").addEventListener("submit", function(e){  
+  e.preventDefault();  
+  
+  const record = {  
+    name: document.getElementById("studentName").value.trim(),  
+    session: document.getElementById("session").value.trim(),  
+    courseType: document.getElementById("courseType").value.trim(),  
+    courseInterest: document.getElementById("courseInterest").value.trim(),  
+    fatherName: document.getElementById("fatherName").value.trim(),  
+    motherName: document.getElementById("motherName").value.trim(),  
+    mobile: document.getElementById("studentMobile").value.trim(),  
+    altMobile: document.getElementById("altMobile").value.trim(),  
+    email: document.getElementById("email").value.trim(),  
+    dob: document.getElementById("dob").value.trim(),  
+    gender: document.getElementById("gender").value.trim(),  
+    qualification: document.getElementById("qualification").value.trim(),  
+    address: document.getElementById("address").value.trim(),  
+    rollNo: document.getElementById("rollNoInput").value.trim(),  
+    savedAt: new Date().toISOString()  
+  };  
+  
+  if(!record.rollNo || !record.name || !record.session || !record.courseType || !record.fatherName || !record.mobile || !record.email || !record.dob || !record.gender || !record.address){  
+    alert("Please fill all required (*) fields.");  
+    return;  
+  }  
+
+  // ✅ Optional safety: avoid duplicate same Roll No (very small change, but helpful)
+  const key = "gvs_results";
+  const arr = JSON.parse(localStorage.getItem(key) || "[]");
+  const exists = arr.some(r => String(r.rollNo||"").trim().toLowerCase() === record.rollNo.toLowerCase());
+  if(exists){
+    alert("This Roll No already exists. Please use a unique Roll No.");
+    return;
+  }
+  
+  saveRecord(record);  
+  syncResultButton();  
+
+  // ✅ Show small saved message
+  showSubmitMessage(record);
+
+  // ✅ IMPORTANT: reset form so you can create NEW student form immediately
+  this.reset();
+  document.getElementById("rollNoInput").focus();
+});  
+  
+/* ====== RESULT SEARCH HANDLER ====== */  
+document.getElementById("resultSearchForm").addEventListener("submit", function(e){  
+  e.preventDefault();  
+  
+  const name = document.getElementById("searchName").value.trim().toLowerCase();  
+  const roll = document.getElementById("searchRoll").value.trim().toLowerCase();  
+  
+  const key = "gvs_results";  
+  const arr = JSON.parse(localStorage.getItem(key) || "[]");  
+  
+  const found = arr.find(r =>  
+    (String(r.name||"").trim().toLowerCase() === name) &&  
+    (String(r.rollNo||"").trim().toLowerCase() === roll)  
+  );  
+  
+  const out = document.getElementById("resultOutput");  
+  
+  if(!found){  
+    out.innerHTML = `  
+      <div class="result-card">  
+        <div class="badge">Not Found ❌</div>  
+        <div style="margin-top:8px;">Name & Roll No match nahi hua.</div>  
+      </div>  
+    `;  
+    return;  
+  }  
+  
+  out.innerHTML = `  
+    <div class="result-card">  
+      <div class="badge">Result Found ✅</div>  
+      <div class="row"><b>Name:</b> <span>${escapeHtml(found.name)}</span></div>  
+      <div class="row"><b>Roll No:</b> <span>${escapeHtml(found.rollNo)}</span></div>  
+      <div class="row"><b>Session:</b> <span>${escapeHtml(found.session)}</span></div>  
+      <div class="row"><b>Course Type:</b> <span>${escapeHtml(found.courseType)}</span></div>  
+      <div class="row"><b>Course Interest:</b> <span>${escapeHtml(found.courseInterest || "-")}</span></div>  
+      <div class="row"><b>Mobile:</b> <span>${escapeHtml(found.mobile)}</span></div>  
+      <div class="row"><b>Email:</b> <span>${escapeHtml(found.email)}</span></div>  
+      <div class="row"><b>DOB:</b> <span>${escapeHtml(found.dob)}</span></div>  
+      <div class="row"><b>Gender:</b> <span>${escapeHtml(found.gender)}</span></div>  
+      <div class="row"><b>Address:</b> <span>${escapeHtml(found.address)}</span></div>  
+    </div>  
+  `;  
+});  
+  
+/* ✅ enable result button on load if already saved */  
+syncResultButton();  
+</script>  
+  
+</body>  
+</html>
